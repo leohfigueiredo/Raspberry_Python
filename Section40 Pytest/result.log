@@ -1,0 +1,45 @@
+. test/test_module01.py::test_case01
+. test/test_module02.py::TestClass01::test_case01
+. test/test_module02.py::TestClass01::test_Case02
+. test/test_module03.py::test_case01
+. test/test_module03.py::test_case02
+. test/test_module03.py::TestClass02::test_case01
+. test/test_module03.py::TestClass02::test_case02
+. test/test_module04.py::test_case01
+. test/test_module05.py::test_case01
+. test/test_module06.py::TestClass03::test_case01
+. test/test_module06.py::TestClass03::test_case02
+. test/test_module07.py::test_case01
+E test/test_module08.py::test_case01
+ request = <SubRequest 'fixture01' for <Function test_case01>>
+ 
+     @pytest.fixture(scope="session")
+     #@pytest.fixture(scope="function")
+     #@pytest.fixture(scope="class")
+     def fixture01(request):
+     	print("\nIn fixture...")
+     	print("Fixture Scope: " + str(request.scope))
+ >   	print("Function Name: " + str(request.function.__name__))
+ 
+ test/test_module08.py:10: 
+ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+ 
+ self = <SubRequest 'fixture01' for <Function test_case01>>
+ 
+     def provide(self):
+         if func.__name__ in scope2props[self.scope]:
+             return func(self)
+         raise AttributeError(
+ >           "{} not available in {}-scoped context".format(scopename, self.scope)
+         )
+ E       AttributeError: function not available in session-scoped context
+ 
+ /home/pi/.local/lib/python3.7/site-packages/_pytest/fixtures.py:79: AttributeError
+. test/test_module09.py::test_case01
+F test/test_module09.py::test_case02
+ def test_case02():
+     	with pytest.raises(Exception):
+ >   		x = 1 / 1
+ E     Failed: DID NOT RAISE <class 'Exception'>
+ 
+ test/test_module09.py:9: Failed
